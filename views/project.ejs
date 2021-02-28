@@ -1,0 +1,27 @@
+<%- include("./partials/header.ejs") %>
+
+<div class="ui main container segment">
+	<h1>PED Landscape</h1>
+	<table class="ui single line selectable table ">
+		<thead>
+			<tr>
+				<th>Title: </th>
+				<th>Client: </th>
+				<th>Created: </th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+	<% projects.forEach( (project)=> { %>
+		<tr>
+			<td><a href="/projects/<%= project._id %>/bflocs" ><%= project.projectTitle %></a><a href="/projects/<%= project._id %>" >&emsp;<i class="edit icon"></i></a></td>
+			<td><%= project.client %></td>
+			<td><%= project.created.toDateString() %></td>
+			
+		</tr>		
+	<% }) %>
+		</tbody>
+	</table>
+</div>
+
+<%- include("./partials/footer.ejs") %>

@@ -1,0 +1,45 @@
+<%- include("./partials/header.ejs") %>
+
+
+<div class="ui main text container segment">
+	<div class="ui header center align">
+		Business Functions
+		<form class="ui form" action="/business_functions/<%= edit? business_function.id +'/edit'+'?_method=PUT' :'new' %>" method="POST">
+			
+			<div class="ui field">
+				<label>Business Function</label>
+				<input type="text" name="bfloc[business_function]" placeholder="Business Function" value="<%= edit? business_function.business_function :''%>" >
+			</div>
+			
+			<input class="ui button" type="submit">
+			
+		</form>	
+	</div>
+</div>
+<div class="ui text container segment">
+	<div class="ui  center align">
+		<table class="ui single line selectable table ">
+		<thead>
+			<tr>
+				<th>Business Function: </th>
+			</tr>
+		</thead>
+		<tbody>
+			<% bfloc_business_functions.forEach((bf)=>{ %>
+			<tr>	
+				<td><%= bf.business_function %>
+					&emsp;
+					<a href="/business_functions/<%= bf.id %>/edit">
+						<i class="edit icon"></i>
+					</a>
+				</td>
+			</tr>		
+		
+			<%})%>
+		</tbody>
+		</table>
+	</div>
+</div>
+
+
+<%- include("./partials/footer.ejs") %>

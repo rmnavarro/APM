@@ -1,0 +1,44 @@
+<%- include("./partials/header.ejs") %>
+
+
+<div class="ui main text container segment">
+	<div class="ui header center align">
+		Locations
+		<form class="ui form" action="/locations/<%= edit? location.id +'/edit'+'?_method=PUT' :'new' %>" method="POST">
+			
+			<div class="ui field">
+				<label>Location</label>
+				<input type="text" name="bfloc[location]" placeholder="Location" value="<%= edit? location.location :''%>" >
+			</div>
+			
+			<input class="ui button" type="submit">
+			
+		</form>	
+	</div>
+</div>
+<div class="ui text container segment">
+	<div class="ui  center align">
+		<table class="ui single line selectable table ">
+		<thead>
+			<tr>
+				<th>Location: </th>
+			</tr>
+		</thead>
+		<tbody>
+			<% bfloc_locations.forEach((loc)=>{ %>
+			<tr>	
+				<td><%= loc.location %>
+					&emsp;
+					<a href="/locations/<%= loc.id %>/edit">
+						<i class="edit icon"></i>
+					</a>
+				</td>
+			</tr>		
+		
+			<%})%>
+		</tbody>
+		</table>
+	</div>
+</div>
+
+<%- include("./partials/footer.ejs") %>

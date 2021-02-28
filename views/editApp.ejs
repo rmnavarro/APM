@@ -1,0 +1,57 @@
+<%- include("./partials/header.ejs") %>
+
+
+<div class="ui main text container segment">
+	<div class="ui header center align">
+		Applications from <%= project.bfs_locs.id(bflocID).business_function %> in <%= project.bfs_locs.id(bflocID).location %>:
+		<form class="ui form" action="/projects/<%= project.id %>/bflocs/<%= bflocID %>/applications/<%= edit? idapp+'?_method=PUT' :'new' %>" method="POST">
+			
+			<div class="ui field">
+				<label>Business Process</label>
+				<input type="text" name="application[process]" placeholder="Business Process" value="<%= edit? project.bfs_locs.id(bflocID).applications.id(idapp).process:''%>" >
+			</div>
+			
+			<div class="field">
+				<label>Current Application</label>
+				<input type="text" name="application[current_app]" placeholder="Current Application" value="<%= edit? project.bfs_locs.id(bflocID).applications.id(idapp).current_app:''%>" >
+			</div>
+			
+			<div class="field">
+				<label>Future Application</label>
+				<input type="text" name="application[future_app]" placeholder="Future Application" value="<%= edit? project.bfs_locs.id(bflocID).applications.id(idapp).future_app:''%>" >
+			</div>
+			
+			<input class="ui button" type="submit">
+			
+		</form>	
+	</div>
+</div>
+<div class="ui text container segment">
+	<div class="ui  center align">
+		<table class="ui single line selectable table ">
+		<thead>
+			<tr>
+				<th>Business Process: </th>
+				<th>Current Application: </th>
+				<th>Future Application: </th>
+			</tr>
+		</thead>
+		<tbody>
+			<% project.bfs_locs.id(bflocID).applications.forEach((application)=>{ %>
+			<tr>
+				
+				
+				<td><%=application.process%></td>
+				<td><%=application.current_app%></td>
+				<td><%=application.future_app%>
+				<a href="/projects/<%= project.id %>/bflocs/<%= bflocID %>/applications/<%= application.id %>/edit"><i class="edit icon"></i></a>
+				</td>
+			</tr>		
+		
+			<%})%>
+		</tbody>
+		</table>
+	</div>
+</div>
+
+<%- include("./partials/footer.ejs") %>

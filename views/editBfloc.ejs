@@ -1,0 +1,60 @@
+<%- include("./partials/header.ejs") %>
+
+
+<div class="ui main text container segment">
+	<div class="ui header center align">
+		Business Functions and Locations
+		<form class="ui form" action="/projects/<%= project.id %>/bflocs/<%= edit? bflocID+'?_method=PUT' :'new' %>" method="POST">
+			
+
+			<label>Business Function &emsp;<a href="/business_functions"><i class="plus square outline icon"></i></a></label>
+				<select class="ui basic floating dropdown button menu" name="bfloc[business_function]">
+					<% business_functions.forEach((bf)=>{ %>
+					 <% if(edit) {%>
+						<option class="item" value="<%=bf.business_function%>" <%= project.bfs_locs.id(bflocID).business_function===bf.business_function? 'selected' : '' %>><%=bf.business_function%></option>
+					<% } else {%>
+						<option class="item" value="<%=bf.business_function%>"><%=bf.business_function%></option>
+					<%}})%>
+				</select>
+			
+			<label>Locations &emsp;<a href="/locations"><i class="plus square outline icon"></i></a></label>
+				<select class="ui basic dropdown button menu" name="bfloc[location]">
+					<% locations.forEach((loc)=>{ %>
+					 <% if(edit) {%>
+						<option class="text item"  value="<%=loc.location%>" <%= project.bfs_locs.id(bflocID).location===loc.location? 'selected' : '' %>><%=loc.location%></option>
+					<% } else {%>
+						<option class="text item" value="<%=loc.location%>"><%=loc.location%></option>
+					<%}})%>
+				</select>
+					
+				<input class="ui  button" type="submit">
+				<p style="color:red"> <%=errors%></p>
+		</form>	
+	</div>
+</div>
+<div class="ui text container segment">
+	<div class="ui  center align">
+		<table class="ui single line selectable table ">
+		<thead>
+			<tr>
+				<th>Business Function: </th>
+				<th>Location: </th>
+			</tr>
+		</thead>
+		<tbody>
+			<% project.bfs_locs.forEach((bfloc)=>{ %>
+			<tr>	
+				<td><%= bfloc.business_function %></td>
+				<td><%= bfloc.location %>&emsp;
+					<a href="/projects/<%= project.id %>/bflocs/<%= bfloc.id %>/edit"><i class="edit icon"></i></a>
+					<a href="/projects/<%= project.id %>/bflocs/<%= bfloc.id %>/applications"><i class="arrow alternate circle right icon"></i></a>
+				</td>
+			</tr>		
+		
+			<%})%>
+		</tbody>
+		</table>
+	</div>
+</div>
+
+<%- include("./partials/footer.ejs") %>

@@ -1,0 +1,10 @@
+Command line to delete an item from a subdocument
+ db.projects.updateOne({"_id": ObjectId("5f401a1090df95550fe1e6e5")},{$pull:{"bfs_locs":{"_id" : ObjectId("5f4b036b1f51420398c6ccca")}}})
+ 
+ 
+ 
+  db.projects.find({bfs_locs:{ $elemMatch: { location:"Rio de Janeiro", business_function:"Human Resources"} }})
+  
+  db.projects.find({"bfs_locs.applications":{ $elemMatch: {process : "process2"} }})
+  
+db.projects.find({"bfs_locs.applications":{ $elemMatch: {process : "process2",current_app: "current app 001", future_app:"current app 001"} }})
