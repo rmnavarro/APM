@@ -211,6 +211,7 @@ app.put(
 //    Routes for BFLOCS
 //######################################################################################################################################
 
+//Check about deep copy and shallow copy
 var myBF;
 var myLOC;
 var errorBFL;
