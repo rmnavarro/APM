@@ -222,9 +222,11 @@ app.get("/projects/:id/bflocs",(req, res)=>{
 			bfloc_location.find({}, (err, locations) => {
 				if(err){ console.log("DataBase Error!!")}
 				else { 
+                    myLOC =  locations.copyWithin();
                     bfloc_business_function.find({}, (err, business_functions) => {
                         if(err){ console.log("DataBase Error!!")}
                         else { 
+                            myBF =  business_functions.copyWithin();
                             res.render("editBfloc", {project:foundProject, business_functions:business_functions, locations: locations, edit: false, errors:errorBFL });}
                         })
                     
