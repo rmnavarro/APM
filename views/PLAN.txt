@@ -1,0 +1,17 @@
+/projects/
+
+/project/new
+
+/project/:id/edit
+
+/project/:id/bf_locs/
+/project/:id/bf_locs/new
+
+/project/:id/bf_locs/:id/edit
+/project/:id/bf_locs/:id/delete
+
+/project/:id/bf_loc/:id/applications
+/project/:id/bf_loc/:id/applications/new
+
+/project/:id/bf_loc/:id/applications/:id/edit
+/project/:id/bf_loc/:id/applications/:id/delete
