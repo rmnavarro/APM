@@ -5,7 +5,7 @@ var methodOverride = require("method-override");
 var express = require("express");
 var app = express();
 
-const urlid = "mongodb+srv://rafaelnavarro:mypass@cluster0.mkp65.azure.mongodb.net/EA_Landscape?retryWrites=true&w=majority";
+const urlid = "mongodb+srv://rafaelnavarro:147852369@cluster0.mkp65.azure.mongodb.net/EA_Landscape?retryWrites=true&w=majority";
 const urlid2 = "mongodb://localhost/pedlandscape"
 mongoose.connect(urlid, {useNewUrlParser: true});
 
@@ -44,7 +44,7 @@ var projectSchema = new mongoose.Schema({
 	projectTitle: String,
 	client: String,
 	startDate: Date,
-	created: {type: Date, default: Date.now }, 
+	created: {type: Date, default: Date.now },
 	description: String,
 	bfs_locs: [bflocSchema]
 })
@@ -63,8 +63,8 @@ app.get("/", (req, res) => { res.redirect("/projects")});
 
 //Get projects
 app.get(
-	"/projects", 
-	(req, res) => { 
+	"/projects",
+	(req, res) => {
 		project.find({},
 		(err, projects) => {
 			if(err){ console.log("DataBase Error!!")}
@@ -75,7 +75,7 @@ app.get(
 
 //Create NEW project
 app.get(
-	"/projects/new", 
+	"/projects/new",
 	(req, res) => {
 		res.render("newProject");
 	}
@@ -83,7 +83,7 @@ app.get(
 
 //POST NEW project
 app.post(
-	"/projects", 
+	"/projects",
 	(req, res)=> {
 	project.create(req.body.project, (err, newProject)=> {
 		if(err){res.render("new")}
@@ -94,10 +94,10 @@ app.post(
 
 //EDIT project
 app.get(
-	"/projects/:id", 
+	"/projects/:id",
 	(req, res)=> {
 		project.findById(
-			req.params.id, 
+			req.params.id,
 			(err, foundProject)=> {
 				if(err){alert("ERROR FINDING PROJECT..."); res.redirect("/projects");}
 				else { res.render("editProject", {project:foundProject});}
@@ -108,10 +108,10 @@ app.get(
 
 //PUT UPDATES IN project
 app.put(
-	"/projects/:id", 
+	"/projects/:id",
 	(req, res)=> {
 		project.findByIdAndUpdate(
-			req.params.id, 
+			req.params.id,
 			req.body.project,
 			(err, updatedProject)=>{
 				if(err){res.redirect("/projects");}
@@ -127,8 +127,8 @@ app.put(
 
 //Get business functions
 app.get(
-	"/business_functions", 
-	(req, res) => { 
+	"/business_functions",
+	(req, res) => {
 		bfloc_business_function.find(
 			{},
 			(err, bfloc_business_functions) => {
@@ -141,10 +141,10 @@ app.get(
 
 //POST NEW business function
 app.post(
-	"/business_functions/new", 
+	"/business_functions/new",
 	(req, res)=> {
 		bfloc_business_function.create(
-			req.body.bfloc, 
+			req.body.bfloc,
 			(err, newBF)=> {
 				if(err){ res.redirect("/business_functions"); console.log("This element already exists");}
 				else { res.redirect("/business_functions");}
@@ -157,12 +157,12 @@ app.post(
 app.get("/business_functions/:id/edit",(req, res)=>{
 		bfloc_business_function.find({}, (err, bfloc_business_functions) => {
 		if(err){ console.log("DataBase Error!!")}
-		else { 
+		else {
 			bfloc_business_function.findById(req.params.id, (err, business_function)=> {
 			if(err){ res.redirect("/projects");}
 			else { res.render("business_functions", {bfloc_business_functions: bfloc_business_functions, business_function: business_function, edit: true});}
 	})}})})
-	
+
 
 //PUT update business_function
 app.put("/business_functions/:id/edit",  (req, res)=> {	bfloc_business_function.findById(req.params.id, (err, foundBF)=> {
@@ -172,7 +172,7 @@ app.put("/business_functions/:id/edit",  (req, res)=> {	bfloc_business_function.
 					if(err){alert("ERROR SAVING BUSINESS FUNCTION...");}
 					else {res.render("business_functions", {bfloc_business_functions:foundBF});}
 				})
-			}}) 
+			}})
 		res.redirect("/business_functions");
 })
 
@@ -184,7 +184,7 @@ app.put("/business_functions/:id/edit",  (req, res)=> {	bfloc_business_function.
 
 
 //Get Locations
-app.get("/locations", (req, res) => { 
+app.get("/locations", (req, res) => {
 	bfloc_location.find({}, (err, bfloc_locations) => {
 		if(err){ console.log("DataBase Error!!")}
 		else { res.render("locations", {bfloc_locations: bfloc_locations, edit: false});}
@@ -203,25 +203,25 @@ app.post("/locations/new", (req, res)=> {
 app.get("/locations/:id/edit",(req, res)=>{
 		bfloc_location.find({}, (err, bfloc_locations) => {
 		if(err){ console.log("DataBase Error!!")}
-		else { 
+		else {
 			bfloc_location.findById(req.params.id, (err, location)=> {
 			if(err){ res.redirect("/locations");}
 			else { res.render("locations", {bfloc_locations: bfloc_locations, location: location, edit: true});}
 	})}})})
-	
+
 
 //PUT update locations
 app.put(
-	"/locations/:id/edit",  
-	(req, res)=> {	
+	"/locations/:id/edit",
+	(req, res)=> {
 		bfloc_location.findById(
-			req.params.id, 
+			req.params.id,
 			(err, foundLOC)=> {
-				if(err) { 
-					alert("ERROR FINDING PROJECT..."); 
+				if(err) {
+					alert("ERROR FINDING PROJECT...");
 					res.redirect("/projects");
 				}
-				else { 
+				else {
 					foundLOC.location=req.body.bfloc.location;
 					foundLOC.save( (err, foundLOC)=> {
 						if(err){
@@ -229,12 +229,12 @@ app.put(
 						}
 						else {
 							res.render(
-								"locations", 
+								"locations",
 								{bfloc_locations:foundLOC});
 						}
 					})
                 }
-			}) 
+			})
 		res.redirect("/locations");
 	}
 )
@@ -253,7 +253,7 @@ var errorBFL;
 app.get("/projects/:id/bflocs",(req, res)=>{
 	project.findById(req.params.id, (err, foundProject)=> {
 		if(err){alert("ERROR FINDING PROJECT..."); res.redirect("/projects");}
-		else { 	
+		else {
 			bfloc_location.find({}, (err, locations) => {
 				if(err){ console.log("DataBase Error!!")}
 				else { myLOC = locations; }
@@ -261,21 +261,21 @@ app.get("/projects/:id/bflocs",(req, res)=>{
 			bfloc_business_function.find({}, (err, business_functions) => {
 				if(err){ console.log("DataBase Error!!")}
 				else { myBF = business_functions; res.render("editBfloc", {project:foundProject, business_functions:myBF, locations: myLOC, edit: false, errors:errorBFL });}
-				})}					
+				})}
 	});
 })
 
 //Add new BFLOC
-app.post("/projects/:id/bflocs/new", 
+app.post("/projects/:id/bflocs/new",
 	 (req, res)=> {	project.findById(req.params.id, (err, foundProject)=> {
 		errorBFL = "";
 		if(err) { console.log("ERROR FINDING PROJECT..."); res.redirect("/projects");}
-		else {  
-			project.find({bfs_locs:{ $elemMatch: { location:req.body.bfloc.location, business_function:req.body.bfloc.business_function}}}, 
+		else {
+			project.find({bfs_locs:{ $elemMatch: { location:req.body.bfloc.location, business_function:req.body.bfloc.business_function}}},
 						 (err, docs) => {
 				if(err){ console.log("Database Error"); next();}
-				else { 
-					if(!docs.length) 
+				else {
+					if(!docs.length)
 					{
 						foundProject.bfs_locs.push(req.body.bfloc);
 						foundProject.save( (err, project)=> {
@@ -289,7 +289,7 @@ app.post("/projects/:id/bflocs/new",
 					}
 				}
 			})
-			}}) 
+			}})
 		res.redirect("/projects/"+ req.params.id +"/bflocs/");
 		})
 
@@ -310,7 +310,7 @@ app.put("/projects/:id/bflocs/:idbf",  (req, res)=> {	project.findById(req.param
 					if(err){alert("ERROR SAVING PROJECT...");}
 					else {res.render("editBfloc", {project:project, business_functions:myBF,locations: myLOC});}
 				})
-			}}) 
+			}})
 		res.redirect("/projects/"+ req.params.id +"/bflocs/");
 })
 
@@ -330,12 +330,12 @@ app.get("/projects/:id/bflocs/:idbf/applications",(req, res)=>{
 })
 
 //Add new Applications
-app.post("/projects/:id/bflocs/:idbf/applications/new", 
+app.post("/projects/:id/bflocs/:idbf/applications/new",
 	 (req, res)=> {	project.findById(req.params.id, (err, foundProject)=> {
 		if(err) { console.log("ERROR FINDING PROJECT..."); res.redirect("/projects");}
-		else { 
+		else {
 			console.log("Adding Application")
-			
+
 			//Verify whether the process exist or not before adding it.
 			project.find({"bfs_locs.applications":{ $elemMatch:
 				{process : req.body.application.process}}},
@@ -345,38 +345,38 @@ app.post("/projects/:id/bflocs/:idbf/applications/new",
 				else
 				{
 					if(!docs.length)
-					{	
+					{
 						foundProject.bfs_locs.id(req.params.idbf).applications.push(req.body.application);
-						foundProject.save( (err, project)=> { 
-							if(err){ console.log("ERROR SAVING PROJECT...");} 
+						foundProject.save( (err, project)=> {
+							if(err){ console.log("ERROR SAVING PROJECT...");}
 							else {res.render("editApp", {project:project, bflocID:req.params.idbf});}})
-					
+
 					}
 					else{
-						
+
 						console.log("ERROR SAVING APPLICATION");
 						errorApp = "The selected process already exist.";
 					}
 				}
 			})
 		}
-	}) 
+	})
 	res.redirect("/projects/"+ req.params.id +"/bflocs/" + req.params.idbf + "/applications");
 })
 
 /* - ORIGINAL
 //Add new Applications
-app.post("/projects/:id/bflocs/:idbf/applications/new", 
+app.post("/projects/:id/bflocs/:idbf/applications/new",
 	 (req, res)=> {	project.findById(req.params.id, (err, foundProject)=> {
 		if(err) { alert("ERROR FINDING PROJECT..."); res.redirect("/projects");}
-		else { 
-			
+		else {
+
 			//INCLUDE APP CHECK HERE
-			
+
 			foundProject.bfs_locs.id(req.params.idbf).applications.push(req.body.application);
 			foundProject.save( (err, project)=> { if(err){ console.log("ERROR SAVING PROJECT...");} else {res.render("editApp", {project:project});}})
 		}
-	}) 
+	})
 	res.redirect("/projects/"+ req.params.id +"/bflocs/" + req.params.idbf + "/applications");
 })
 */
@@ -400,8 +400,8 @@ app.put("/projects/:id/bflocs/:idbf/applications/:idapp",  (req, res)=> {	projec
 					if(err){alert("ERROR SAVING PROJECT...");}
 					else {res.render("editBfloc", {project:project});}
 				})
-			}}) 
+			}})
 		res.redirect("/projects/"+ req.params.id +"/bflocs/" + req.params.idbf + "/applications");
 })
 
-app.listen(3000, () => { console.log("Server listening on port 3000..."); });
+app.listen(3003, () => { console.log("Server listening on port 3000..."); });
