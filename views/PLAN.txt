@@ -4,14 +4,14 @@
 
 /project/:id/edit
 
-/project/:id/bf_locs/
-/project/:id/bf_locs/new
+/project/:id_pro/bf_lc/
+/project/:id_pro/bf_lc/new
 
-/project/:id/bf_locs/:id/edit
-/project/:id/bf_locs/:id/delete
+/project/:id_pro/bf_lc/:id_bf-lc/edit
+/project/:id_pro/bf_lc/:id/delete
 
-/project/:id/bf_loc/:id/applications
-/project/:id/bf_loc/:id/applications/new
+/project/:id_pro/bf_lc/:id_bf-lc/applications
+/project/:id_pro/bf_lc/:id_bf-lc/applications/new
 
-/project/:id/bf_loc/:id/applications/:id/edit
-/project/:id/bf_loc/:id/applications/:id/delete
+/project/:id_pro/bf_lc/:id_bf-lc/applications/:id_app/edit
+/project/:id_pro/bf_lc/:id_bf-lc/applications/:id_app/delete

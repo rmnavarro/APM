@@ -14,7 +14,7 @@
 		<tbody>
 	<% projects.forEach( (project)=> { %>
 		<tr>
-			<td><a href="/projects/<%= project._id %>/bflocs" ><%= project.projectTitle %></a><a href="/projects/<%= project._id %>" >&emsp;<i class="edit icon"></i></a></td>
+			<td><a href="/project/<%= project._id %>/bf_lc"> <%= project.projectTitle %> </a> <a href="/project/<%= project._id %>/edit">&emsp; <i class="edit icon"></i></a></td>
 			<td><%= project.client %></td>
 			<td><%= project.created.toDateString() %></td>
 			

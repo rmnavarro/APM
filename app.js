@@ -1,5 +1,4 @@
 var bodyparser = require("body-parser");
-var mongoose = require("mongoose");
 
 var methodOverride = require("method-override");
 var express = require("express");
@@ -7,9 +6,6 @@ var app = express();
 
 const { project, bfloc,	application, bfloc_business_function, bfloc_location } = require("./db_model.js")
 	   
-const urlid = "mongodb+srv://rafaelnavarro:147852369@cluster0.mkp65.azure.mongodb.net/EA_Landscape?retryWrites=true&w=majority";
-const urlid2 = "mongodb://localhost/pedlandscape"
-mongoose.connect(urlid, {useNewUrlParser: true, useUnifiedTopology: true });
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
