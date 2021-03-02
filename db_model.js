@@ -48,5 +48,5 @@ module.exports = {
 	bfloc,
 	application,
 	bfloc_business_function,
-	bfloc_location
+	bfloc_location 
 }
