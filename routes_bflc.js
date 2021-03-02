@@ -48,24 +48,31 @@ exports.add_bflc = function(req, res) {
                 {
                     console.log("This Location and Business Function already exist!");
                     BFL_exist = true;
+                    errorBFL = "The selected item already exist."
                     break;
                 }
         }            
         if(!BFL_exist) {
             foundProject.bfs_locs.push(req.body.bfloc);
-            foundProject.save( (err, project)=> {
+            foundProject.save( (err, savedProject)=> {
                 if(err){
                     console.log("ERROR SAVING PROJECT...");
                 } else {
-                    res.render("editBfloc", {project:project, business_functions:business_functions, locations: locations, edit: false, errors:errorBFL});}
+                    console.log("Adding Business Function and location.")
+                    res.redirect("/project/"+ req.params.id_pro +"/bf_lc");
+                    /*res.render("editBfloc", {project:savedProject, business_functions:myBF, locations: myLOC, edit: false, errors:errorBFL},
+                    (err, html)=> {
+                        if(!err){ res.send(html)}
+                    });*/
+                }
             })
-        }else
-        {
-            errorBFL = "The selected item already exist."
+        } else {
+            console.log("Rendering new template.")
+            res.render("editBfloc", {project:foundProject, business_functions:myBF, locations: myLOC, edit: false, errors:errorBFL});
         }
     }}) 
 
-    res.redirect("/project/"+ req.params.id_pro +"/bf_lc");
+    //res.redirect("/project/"+ req.params.id_pro +"/bf_lc");
 };
 
 exports.edit_bflc = function(req, res){

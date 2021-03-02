@@ -4,7 +4,7 @@
 <div class="ui main text container segment">
 	<div class="ui header center align">
 		Applications from <%= project.bfs_locs.id(bflocID).business_function %> in <%= project.bfs_locs.id(bflocID).location %>:
-		<form class="ui form" action="/projects/<%= project.id %>/bflocs/<%= bflocID %>/applications/<%= edit? idapp+'?_method=PUT' :'new' %>" method="POST">
+		<form class="ui form" action="/project/<%= project.id %>/bf_lc/<%= bflocID %>/applications/<%= edit? idapp+'/edit' :'new' %>" method="POST">
 			
 			<div class="ui field">
 				<label>Business Process</label>
@@ -22,6 +22,7 @@
 			</div>
 			
 			<input class="ui button" type="submit">
+            <p style="color:red"> <%=errors%></p>
 			
 		</form>	
 	</div>
@@ -44,7 +45,7 @@
 				<td><%=application.process%></td>
 				<td><%=application.current_app%></td>
 				<td><%=application.future_app%>
-				<a href="/projects/<%= project.id %>/bflocs/<%= bflocID %>/applications/<%= application.id %>/edit"><i class="edit icon"></i></a>
+				<a href="/project/<%= project.id %>/bf_lc/<%= bflocID %>/applications/<%= application.id %>/edit"><i class="edit icon"></i></a>
 				</td>
 			</tr>		
 		

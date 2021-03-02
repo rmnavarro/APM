@@ -28,12 +28,12 @@ app.get('/project/:id_pro/bf_lc', bflc_route.list )
 app.post('/project/:id_pro/bf_lc/new', bflc_route.add_bflc) 
 app.get('/project/:id_pro/bf_lc/:id_bflc/edit', bflc_route.edit_bflc)
 app.post('/project/:id_pro/bf_lc/:id_bflc/edit', bflc_route.save_bflc)
-
 //app.get('/project/:id_pro/bf_lc/:id_bflc/delete', bflc_route )
 
-//app.get('/project/:id_pro/bf_lc/:id_bflc/applications', application_route )
-//app.get('/project/:id_pro/bf_lc/:id_bflc/applications/new', application_route )
-//app.get('/project/:id_pro/bf_lc/:id_bflc/applications/:id_app/edit', application_route )
+app.get('/project/:id_pro/bf_lc/:id_bflc/applications', application_route.list )
+app.post('/project/:id_pro/bf_lc/:id_bflc/applications/new', application_route.add_application )
+app.get('/project/:id_pro/bf_lc/:id_bflc/applications/:id_app/edit', application_route.edit_application )
+app.post('/project/:id_pro/bf_lc/:id_bflc/applications/:id_app/edit', application_route.save_application )
 //app.get('/project/:id_pro/bf_lc/:id_bflc/applications/:id_app/delete', application_route )
 
 //Start listening the server's port.
