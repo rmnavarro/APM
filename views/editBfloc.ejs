@@ -4,7 +4,7 @@
 <div class="ui main text container segment">
 	<div class="ui header center align">
 		Business Functions and Locations
-		<form class="ui form" action="/projects/<%= project.id %>/bflocs/<%= edit? bflocID+'?_method=PUT' :'new' %>" method="POST">
+		<form class="ui form" action="/project/<%= project.id %>/bf_lc/<%= edit? bflocID+'/edit' :'new' %>" method="POST">
 			
 
 			<label>Business Function &emsp;<a href="/business_functions"><i class="plus square outline icon"></i></a></label>
@@ -46,8 +46,8 @@
 			<tr>	
 				<td><%= bfloc.business_function %></td>
 				<td><%= bfloc.location %>&emsp;
-					<a href="/projects/<%= project.id %>/bflocs/<%= bfloc.id %>/edit"><i class="edit icon"></i></a>
-					<a href="/projects/<%= project.id %>/bflocs/<%= bfloc.id %>/applications"><i class="arrow alternate circle right icon"></i></a>
+					<a href="/project/<%= project.id %>/bf_lc/<%= bfloc.id %>/edit"><i class="edit icon"></i></a>
+					<a href="/project/<%= project.id %>/bf_lc/<%= bfloc.id %>/applications"><i class="arrow alternate circle right icon"></i></a>
 				</td>
 			</tr>		
 		

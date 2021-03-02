@@ -32,6 +32,77 @@ exports.list = function(req, res){
 	});
 };
 
-exports.new = function(req, res){};
+exports.add_bflc = function(req, res) {
+    project.findById(req.params.id_pro, (err, foundProject)=> {
+    let errorBFL = '';
+    let BFL_exist = false;
+    if(err) { 
+        console.log("ERROR FINDING PROJECT..."); 
+        res.redirect("/projects");
+    } else {  
+
+        for(i=0;i<foundProject.bfs_locs.length;i++){
+            if( foundProject.bfs_locs[i].location == req.body.bfloc.location
+                && 
+                foundProject.bfs_locs[i].business_function == req.body.bfloc.business_function)
+                {
+                    console.log("This Location and Business Function already exist!");
+                    BFL_exist = true;
+                    break;
+                }
+        }            
+        if(!BFL_exist) {
+            foundProject.bfs_locs.push(req.body.bfloc);
+            foundProject.save( (err, project)=> {
+                if(err){
+                    console.log("ERROR SAVING PROJECT...");
+                } else {
+                    res.render("editBfloc", {project:project, business_functions:business_functions, locations: locations, edit: false, errors:errorBFL});}
+            })
+        }else
+        {
+            errorBFL = "The selected item already exist."
+        }
+    }}) 
+
+    res.redirect("/project/"+ req.params.id_pro +"/bf_lc");
+};
+
+exports.edit_bflc = function(req, res){
+	project.findById(req.params.id_pro, (err, foundProject)=> {
+		if(err){
+            console.log("ERROR FINDING PROJECT..."); 
+            res.redirect("/projects");
+        } else { 
+            res.render("editBfloc", 
+                {project:foundProject,
+                 bflocID: req.params.id_bflc, 
+                 business_functions:myBF,
+                 locations: myLOC, 
+                 edit: true, 
+                 errors:''});}
+	});
+};
+
+exports.save_bflc = function(req, res) {	
+    project.findById(req.params.id_pro, (err, foundProject)=> {
+        if(err) { 
+            console.log("ERROR FINDING PROJECT..."); 
+            res.redirect("/projects");
+        } else { 
+            foundProject.bfs_locs.id(req.params.id_bflc).business_function=req.body.bfloc.business_function;
+            foundProject.bfs_locs.id(req.params.id_bflc).location=req.body.bfloc.location;
+            foundProject.save( (err, project)=> {
+                if(err){
+                    console.log("ERROR SAVING PROJECT...");
+                } else {
+                    res.render("editBfloc", 
+                        {project:project, 
+                        business_functions:myBF,
+                        locations: myLOC});}
+            })
+        }}) 
+    res.redirect("/project/"+ req.params.id_pro + "/bf_lc");
+}
 
 exports.delete = function(req, res){};

@@ -1,5 +1,5 @@
 {
-  "name": "pedlandscape",
+  "name": "APM - Application Portifolio Management",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -15,7 +15,7 @@
   "scripts": {
     "devStart": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app2.js"
   },
   "author": "Rafael Navarro",
   "license": "ISC"

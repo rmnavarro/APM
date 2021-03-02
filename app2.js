@@ -25,9 +25,11 @@ app.get('/project/:id_pro/edit', project_route.edit_project )
 app.post('/project/:id_pro/edit', project_route.save_project )
 
 app.get('/project/:id_pro/bf_lc', bflc_route.list )
-//app.get('/project/:id_pro/bf_lc/new', bflc_route ) 
-//app.get('/project/:id_pro/bf_lc/:id_bflc/edit', bflc_route )
-//app.get('/project/:id_pro/bf_lc/:id/delete', bflc_route )
+app.post('/project/:id_pro/bf_lc/new', bflc_route.add_bflc) 
+app.get('/project/:id_pro/bf_lc/:id_bflc/edit', bflc_route.edit_bflc)
+app.post('/project/:id_pro/bf_lc/:id_bflc/edit', bflc_route.save_bflc)
+
+//app.get('/project/:id_pro/bf_lc/:id_bflc/delete', bflc_route )
 
 //app.get('/project/:id_pro/bf_lc/:id_bflc/applications', application_route )
 //app.get('/project/:id_pro/bf_lc/:id_bflc/applications/new', application_route )
