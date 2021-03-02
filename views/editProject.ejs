@@ -3,7 +3,7 @@
 <div class="ui main text container segment">
 	<div class="ui header center align">
 		Edit Project - 	Created: <%=project.created.toDateString()%>
-		<form class="ui form" action="/projects/<%= project._id %>?_method=PUT" method="POST">
+		<form class="ui form" action="/project/<%= project._id %>/edit" method="POST">
 			
 			<div class="ui field">
 				<label>Title</label>

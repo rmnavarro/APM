@@ -37,6 +37,11 @@ var projectSchema = new mongoose.Schema({
 
 var project = mongoose.model("project", projectSchema);
 
+const url_id = "mongodb+srv://rafaelnavarro:147852369@cluster0.mkp65.azure.mongodb.net/EA_Landscape?retryWrites=true&w=majority";
+const urlid2 = "mongodb://localhost/pedlandscape"
+
+mongoose.connect(url_id, {useNewUrlParser: true, useUnifiedTopology: true });
+
 module.exports = {
 	project,
 	bfloc,
