@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+require('dotenv').config()
 
 var bfloc_location_schema = new mongoose.Schema({
 	location: { type: String, unique: true } })
@@ -37,10 +38,10 @@ var projectSchema = new mongoose.Schema({
 
 var project = mongoose.model("project", projectSchema);
 
-const url_id = "mongodb+srv://rafaelnavarro:147852369@cluster0.mkp65.azure.mongodb.net/EA_Landscape?retryWrites=true&w=majority";
+const url_online = process.env.MONGODB_URL;
 const urlid2 = "mongodb://localhost/pedlandscape"
 
-mongoose.connect(url_id, {useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(url_online, {useNewUrlParser: true, useUnifiedTopology: true });
 
 module.exports = {
 	project,

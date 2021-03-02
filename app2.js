@@ -16,7 +16,6 @@ exports.module = app;
 app.set("view engine", "ejs");
 
 //Routes definition.
-
 app.get('/', project_route.redirect )
 app.get('/projects', project_route.list )
 app.get('/project/new', project_route.new )
